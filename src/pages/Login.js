@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import sendActionLogin from '../redux/actions';
+import { sendActionToken, sendActionLogin } from '../redux/actions';
+import fetchToken from '../services/API';
 
 class Login extends Component {
   state = {
@@ -15,9 +16,12 @@ class Login extends Component {
     });
   }
 
-  handleClick = () => {
-    const { dispatch } = this.props;
+  handleClick = async () => {
+    const { dispatch, history } = this.props;
     dispatch(sendActionLogin(this.state));
+    const data = await fetchToken();
+    dispatch(sendActionToken(data));
+    history.push('/game');
   }
 
   checkLogin = () => {
@@ -65,6 +69,7 @@ class Login extends Component {
 
 Login.propTypes = {
   dispatch: PropTypes.objectOf.isRequired,
+  history: PropTypes.objectOf.isRequired,
 };
 
 export default connect()(Login);
