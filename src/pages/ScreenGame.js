@@ -12,7 +12,7 @@ class ScreenGame extends Component {
     questionsList: [],
     index: 0,
     answerList: [],
-    isStyle: false,
+    isAnswered: false,
   }
 
   componentDidMount = () => {
@@ -45,6 +45,7 @@ class ScreenGame extends Component {
   increaseIndex = () => {
     this.setState((prev) => ({
       index: prev.index + 1,
+      isAnswered: false,
     }), () => {
       this.organizeAnswers();
     });
@@ -73,11 +74,11 @@ class ScreenGame extends Component {
   };
 
   checkAnswer = () => {
-    this.setState({ isStyle: true });
+    this.setState({ isAnswered: true });
   }
 
   render() {
-    const { questionsList, index, answerList, isStyle } = this.state;
+    const { questionsList, index, answerList, isAnswered } = this.state;
     return (
       <div>
         <Header />
@@ -90,13 +91,24 @@ class ScreenGame extends Component {
                 <button
                   type="button"
                   key={ test }
-                  className={ isStyle && test.split('-')[0] }
+                  className={ isAnswered && test.split('-')[0] }
                   data-testid={ test }
                   onClick={ this.checkAnswer }
                 >
                   {res}
                 </button>
               ))}
+              {
+                isAnswered && (
+                  <button
+                    type="button"
+                    data-testid="btn-next"
+                    onClick={ this.increaseIndex }
+                  >
+                    Next
+                  </button>
+                )
+              }
             </div>
           </div>
         ) : ''}
