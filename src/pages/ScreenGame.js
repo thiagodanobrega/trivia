@@ -13,6 +13,7 @@ class ScreenGame extends Component {
     index: 0,
     answerList: [],
     isAnswered: false,
+    time: 30,
   }
 
   componentDidMount = () => {
@@ -20,6 +21,7 @@ class ScreenGame extends Component {
     const token = getLocalStorage('token');
     dispatch(sendActionToken(token));
     this.getQuestions();
+    this.handleTimer();
   }
 
   getToken = async () => {
@@ -77,11 +79,29 @@ class ScreenGame extends Component {
     this.setState({ isAnswered: true });
   }
 
+  handleTimer = () => {
+    const oneSecund = 1000;
+    const timer = setInterval(() => {
+      this.setState(({ time }) => ({
+        time: time - 1,
+      }), () => {
+        const { time } = this.state;
+        if (time === 0) {
+          clearInterval(timer);
+          this.setState({
+            isAnswered: true,
+          });
+        }
+      });
+    }, oneSecund);
+  }
+
   render() {
-    const { questionsList, index, answerList, isAnswered } = this.state;
+    const { questionsList, index, answerList, isAnswered, time } = this.state;
     return (
       <div>
         <Header />
+        <p>{ time }</p>
         {questionsList.length > 0 ? (
           <div>
             <p data-testid="question-category">{questionsList[index].category}</p>
@@ -93,6 +113,7 @@ class ScreenGame extends Component {
                   key={ test }
                   className={ isAnswered && test.split('-')[0] }
                   data-testid={ test }
+                  disabled={ isAnswered }
                   onClick={ this.checkAnswer }
                 >
                   {res}
