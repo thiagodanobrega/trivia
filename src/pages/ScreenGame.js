@@ -13,6 +13,7 @@ class ScreenGame extends Component {
     index: 0,
     answerList: [],
     isAnswered: false,
+    time: 30,
   }
 
   componentDidMount = () => {
@@ -20,6 +21,7 @@ class ScreenGame extends Component {
     const token = getLocalStorage('token');
     dispatch(sendActionToken(token));
     this.getQuestions();
+    this.handleTimer();
   }
 
   getToken = async () => {
@@ -45,6 +47,7 @@ class ScreenGame extends Component {
   increaseIndex = () => {
     this.setState((prev) => ({
       index: prev.index + 1,
+      isAnswered: false,
     }), () => {
       this.organizeAnswers();
     });
@@ -103,11 +106,33 @@ class ScreenGame extends Component {
     }
   }
 
+  checkAnswer = () => {
+    this.setState({ isAnswered: true });
+  }
+
+  handleTimer = () => {
+    const oneSecund = 1000;
+    const timer = setInterval(() => {
+      this.setState(({ time }) => ({
+        time: time - 1,
+      }), () => {
+        const { time } = this.state;
+        if (time === 0) {
+          clearInterval(timer);
+          this.setState({
+            isAnswered: true,
+          });
+        }
+      });
+    }, oneSecund);
+  }
+
   render() {
-    const { questionsList, index, answerList, isAnswered } = this.state;
+    const { questionsList, index, answerList, isAnswered, time } = this.state;
     return (
       <div>
         <Header />
+        <p>{ time }</p>
         {questionsList.length > 0 ? (
           <div>
             <p data-testid="question-category">{questionsList[index].category}</p>
@@ -120,10 +145,23 @@ class ScreenGame extends Component {
                   className={ isAnswered && test.split('-')[0] }
                   data-testid={ test }
                   onClick={ () => this.checkAnswer(test) }
+                  disabled={ isAnswered }
+                  onClick={ this.checkAnswer }
                 >
                   {res}
                 </button>
               ))}
+              {
+                isAnswered && (
+                  <button
+                    type="button"
+                    data-testid="btn-next"
+                    onClick={ this.increaseIndex }
+                  >
+                    Next
+                  </button>
+                )
+              }
             </div>
           </div>
         ) : ''}
