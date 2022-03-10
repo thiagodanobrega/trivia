@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { getLocalStorage, saveLocalStorage } from '../services/LocalStorage';
 import { sendActionToken } from '../redux/actions';
 import { fetchQuestions, fetchToken } from '../services/API';
+import Header from '../components/Header';
+
 
 class ScreenGame extends Component {
   state ={
@@ -73,6 +75,7 @@ class ScreenGame extends Component {
     const { questionsList, index, answerList } = this.state;
     return (
       <div>
+        <Header />
         {questionsList.length > 0 ? (
           <div>
             <p data-testid="question-category">{questionsList[index].category}</p>
@@ -91,7 +94,6 @@ class ScreenGame extends Component {
             </div>
           </div>
         ) : ''}
-
       </div>
     );
   }
