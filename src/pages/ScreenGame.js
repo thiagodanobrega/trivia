@@ -12,7 +12,8 @@ class ScreenGame extends Component {
     questionsList: [],
     index: 0,
     answerList: [],
-    isStyle: false,
+    isAnswered: false,
+    time: 30,
   }
 
   componentDidMount = () => {
@@ -20,6 +21,7 @@ class ScreenGame extends Component {
     const token = getLocalStorage('token');
     dispatch(sendActionToken(token));
     this.getQuestions();
+    this.handleTimer();
   }
 
   getToken = async () => {
@@ -73,14 +75,32 @@ class ScreenGame extends Component {
   };
 
   checkAnswer = () => {
-    this.setState({ isStyle: true });
+    this.setState({ isAnswered: true });
+  }
+
+  handleTimer = () => {
+    const oneSecund = 1000;
+    const timer = setInterval(() => {
+      this.setState(({ time }) => ({
+        time: time - 1,
+      }), () => {
+        const { time } = this.state;
+        if (time === 0) {
+          clearInterval(timer);
+          this.setState({
+            isAnswered: true,
+          });
+        }
+      });
+    }, oneSecund);
   }
 
   render() {
-    const { questionsList, index, answerList, isStyle } = this.state;
+    const { questionsList, index, answerList, isAnswered, time } = this.state;
     return (
       <div>
         <Header />
+        <p>{ time }</p>
         {questionsList.length > 0 ? (
           <div>
             <p data-testid="question-category">{questionsList[index].category}</p>
@@ -90,8 +110,9 @@ class ScreenGame extends Component {
                 <button
                   type="button"
                   key={ test }
-                  className={ isStyle && test.split('-')[0] }
+                  className={ isAnswered && test.split('-')[0] }
                   data-testid={ test }
+                  disabled={ isAnswered }
                   onClick={ this.checkAnswer }
                 >
                   {res}
