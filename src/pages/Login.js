@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { sendActionToken, sendActionLogin } from '../redux/actions';
-import fetchToken from '../services/API';
+import { fetchToken } from '../services/API';
+import { saveLocalStorage } from '../services/LocalStorage';
 
 class Login extends Component {
   state = {
@@ -19,8 +20,9 @@ class Login extends Component {
   handleClick = async () => {
     const { dispatch, history } = this.props;
     dispatch(sendActionLogin(this.state));
-    const data = await fetchToken();
-    dispatch(sendActionToken(data));
+    const token = await fetchToken();
+    dispatch(sendActionToken(token));
+    saveLocalStorage('token', token);
     history.push('/game');
   }
 
