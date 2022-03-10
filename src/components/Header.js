@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import md5 from 'crypto-js/md5';
+import { saveLocalStorage } from '../services/LocalStorage';
 
 class Header extends Component {
   render() {
-    const { player } = this.props;
+    const { player, playerScore } = this.props;
     const hash = md5(player.gravatarEmail).toString();
     const image = `https://www.gravatar.com/avatar/${hash}`;
+
+    saveLocalStorage('score', playerScore);
 
     return (
       <section>
@@ -17,20 +20,22 @@ class Header extends Component {
           src={ image }
           alt="imagem do jogador"
         />
-        <h3 data-testid="header-score">0</h3>
+        <h3 data-testid="header-score">{playerScore}</h3>
       </section>
     );
   }
 }
 
-const { objectOf } = PropTypes;
+const { objectOf, string } = PropTypes;
 
 Header.propTypes = {
   player: objectOf.isRequired,
+  playerScore: string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   player: state.player,
+  playerScore: state.player.score,
 });
 
 export default connect(mapStateToProps)(Header);

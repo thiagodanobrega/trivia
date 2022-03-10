@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getLocalStorage, saveLocalStorage } from '../services/LocalStorage';
-import { sendActionToken } from '../redux/actions';
+import { sendActionToken, addScoreAction } from '../redux/actions';
 import { fetchQuestions, fetchToken } from '../services/API';
 import Header from '../components/Header';
 import './ScreenGame.css';
@@ -12,7 +12,7 @@ class ScreenGame extends Component {
     questionsList: [],
     index: 0,
     answerList: [],
-    isStyle: false,
+    isAnswered: false,
   }
 
   componentDidMount = () => {
@@ -72,12 +72,39 @@ class ScreenGame extends Component {
     this.shuffleAnswers(answerList);
   };
 
-  checkAnswer = () => {
-    this.setState({ isStyle: true });
+  verifyDifficulty = () => {
+    const ONE = 1;
+    const TWO = 2;
+    const THREE = 3;
+    const { questionsList, index } = this.state;
+    switch (questionsList[index].difficulty) {
+    case 'easy':
+      return ONE;
+    case 'medium':
+      return TWO;
+    case 'hard':
+      return THREE;
+    default:
+      return 0;
+    }
+  }
+
+  checkAnswer = (answer) => {
+    const ONE = 1;
+    const TEN = 10;
+
+    this.setState({ isAnswered: true });
+    const { dispatch } = this.props;
+    if (answer === 'correct-answer') {
+      const difficulty = this.verifyDifficulty();
+      const timer = ONE;
+      const score = TEN + (difficulty * timer);
+      dispatch(addScoreAction(score));
+    }
   }
 
   render() {
-    const { questionsList, index, answerList, isStyle } = this.state;
+    const { questionsList, index, answerList, isAnswered } = this.state;
     return (
       <div>
         <Header />
@@ -90,9 +117,9 @@ class ScreenGame extends Component {
                 <button
                   type="button"
                   key={ test }
-                  className={ isStyle && test.split('-')[0] }
+                  className={ isAnswered && test.split('-')[0] }
                   data-testid={ test }
-                  onClick={ this.checkAnswer }
+                  onClick={ () => this.checkAnswer(test) }
                 >
                   {res}
                 </button>
