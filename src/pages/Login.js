@@ -33,6 +33,11 @@ class Login extends Component {
     );
   }
 
+  onClickSettingsBtn = () => {
+    const { history } = this.props;
+    history.push('/settings');
+  }
+
   render() {
     return (
       <section>
@@ -60,6 +65,13 @@ class Login extends Component {
             onClick={ this.handleClick }
           >
             Play
+          </button>
+          <button
+            type="button"
+            onClick={ this.onClickSettingsBtn }
+            data-testid="btn-settings"
+          >
+            Configurações
           </button>
         </form>
       </section>

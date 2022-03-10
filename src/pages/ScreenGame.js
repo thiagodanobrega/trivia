@@ -14,4 +14,5 @@ class ScreenGame extends Component {
     );
   }
 }
+
 export default ScreenGame;
