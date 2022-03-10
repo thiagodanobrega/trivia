@@ -1,17 +1,109 @@
 import React, { Component } from 'react';
-import { getLocalStorage } from '../services/LocalStorage';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { getLocalStorage, saveLocalStorage } from '../services/LocalStorage';
+import { sendActionToken } from '../redux/actions';
+import { fetchQuestions, fetchToken } from '../services/API';
 
 class ScreenGame extends Component {
-  componentDidMount = () => {
-    getLocalStorage('token');
+  state ={
+    questionsList: [],
+    index: 0,
+    answerList: [],
   }
 
+  componentDidMount = () => {
+    const { dispatch } = this.props;
+    const token = getLocalStorage('token');
+    dispatch(sendActionToken(token));
+    this.getQuestions();
+  }
+
+  getToken = async () => {
+    const { dispatch } = this.props;
+    const tokenAPI = await fetchToken();
+    dispatch(sendActionToken(tokenAPI));
+    saveLocalStorage('token', tokenAPI);
+    const questionsList = await fetchQuestions(tokenAPI);
+    return questionsList;
+  }
+
+  getQuestions = async () => {
+    const { token } = this.props;
+    let questionsList = await fetchQuestions(token);
+    if (questionsList.length === 0) {
+      questionsList = this.getToken();
+    }
+    console.log(questionsList);
+    this.setState({ questionsList });
+    this.organizeAnswers();
+  }
+
+  increaseIndex = () => {
+    this.setState((prev) => ({
+      index: prev.index + 1,
+    }), () => {
+      this.organizeAnswers();
+    });
+  }
+
+  shuffleAnswers = (answerList) => {
+    for (let i = answerList.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [answerList[i], answerList[j]] = [answerList[j], answerList[i]];
+    }
+    this.setState({
+      answerList,
+    });
+  }
+
+  organizeAnswers = () => {
+    const { questionsList, index } = this.state;
+    const answerList = [
+      { res: questionsList[index].correct_answer, test: 'correct-answer' },
+    ];
+    questionsList[index].incorrect_answers.forEach((element, indexAnswers) => {
+      const obj = { res: element, test: `wrong-answer-${indexAnswers}` };
+      answerList.push(obj);
+    });
+    this.shuffleAnswers(answerList);
+  };
+
   render() {
+    const { questionsList, index, answerList } = this.state;
     return (
       <div>
-        <h1>Tela do jogo</h1>
+        {questionsList.length > 0 ? (
+          <div>
+            <p data-testid="question-category">{questionsList[index].category}</p>
+            <p data-testid="question-text">{questionsList[index].question}</p>
+            <div data-testid="answer-options">
+              {answerList.map(({ res, test }) => (
+                <button
+                  type="button"
+                  key={ test }
+                  data-testid={ test }
+                  onClick={ this.increaseIndex }
+                >
+                  {res}
+                </button>
+              ))}
+            </div>
+          </div>
+        ) : ''}
+
       </div>
     );
   }
 }
-export default ScreenGame;
+
+const mapStateToProps = (state) => ({
+  token: state.token,
+});
+
+ScreenGame.propTypes = {
+  token: PropTypes.string.isRequired,
+  dispatch: PropTypes.objectOf.isRequired,
+};
+
+export default connect(mapStateToProps)(ScreenGame);
