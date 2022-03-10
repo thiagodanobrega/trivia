@@ -5,13 +5,14 @@ import { getLocalStorage, saveLocalStorage } from '../services/LocalStorage';
 import { sendActionToken } from '../redux/actions';
 import { fetchQuestions, fetchToken } from '../services/API';
 import Header from '../components/Header';
-
+import './ScreenGame.css';
 
 class ScreenGame extends Component {
   state ={
     questionsList: [],
     index: 0,
     answerList: [],
+    isStyle: false,
   }
 
   componentDidMount = () => {
@@ -71,8 +72,12 @@ class ScreenGame extends Component {
     this.shuffleAnswers(answerList);
   };
 
+  checkAnswer = () => {
+    this.setState({ isStyle: true });
+  }
+
   render() {
-    const { questionsList, index, answerList } = this.state;
+    const { questionsList, index, answerList, isStyle } = this.state;
     return (
       <div>
         <Header />
@@ -85,8 +90,9 @@ class ScreenGame extends Component {
                 <button
                   type="button"
                   key={ test }
+                  className={ isStyle && test.split('-')[0] }
                   data-testid={ test }
-                  onClick={ this.increaseIndex }
+                  onClick={ this.checkAnswer }
                 >
                   {res}
                 </button>
@@ -104,8 +110,8 @@ const mapStateToProps = (state) => ({
 });
 
 ScreenGame.propTypes = {
-  token: PropTypes.string.isRequired,
   dispatch: PropTypes.objectOf.isRequired,
+  token: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps)(ScreenGame);
