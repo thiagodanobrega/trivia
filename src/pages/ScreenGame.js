@@ -47,6 +47,7 @@ class ScreenGame extends Component {
   increaseIndex = () => {
     this.setState((prev) => ({
       index: prev.index + 1,
+      isAnswered: false,
     }), () => {
       this.organizeAnswers();
     });
@@ -118,6 +119,17 @@ class ScreenGame extends Component {
                   {res}
                 </button>
               ))}
+              {
+                isAnswered && (
+                  <button
+                    type="button"
+                    data-testid="btn-next"
+                    onClick={ this.increaseIndex }
+                  >
+                    Next
+                  </button>
+                )
+              }
             </div>
           </div>
         ) : ''}
