@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getLocalStorage } from '../services/LocalStorage';
+import Header from '../components/Header';
 
 class ScreenGame extends Component {
   componentDidMount = () => {
@@ -10,6 +11,7 @@ class ScreenGame extends Component {
     return (
       <div>
         <h1>Tela do jogo</h1>
+        <Header />
       </div>
     );
   }
