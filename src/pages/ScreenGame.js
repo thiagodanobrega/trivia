@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getLocalStorage, saveLocalStorage } from '../services/LocalStorage';
-import { sendActionToken } from '../redux/actions';
+import { sendActionToken, addScoreAction } from '../redux/actions';
 import { fetchQuestions, fetchToken } from '../services/API';
 import Header from '../components/Header';
 import './ScreenGame.css';
@@ -75,6 +75,37 @@ class ScreenGame extends Component {
     this.shuffleAnswers(answerList);
   };
 
+  verifyDifficulty = () => {
+    const ONE = 1;
+    const TWO = 2;
+    const THREE = 3;
+    const { questionsList, index } = this.state;
+    switch (questionsList[index].difficulty) {
+    case 'easy':
+      return ONE;
+    case 'medium':
+      return TWO;
+    case 'hard':
+      return THREE;
+    default:
+      return 0;
+    }
+  }
+
+  checkAnswer = (answer) => {
+    const ONE = 1;
+    const TEN = 10;
+
+    this.setState({ isAnswered: true });
+    const { dispatch } = this.props;
+    if (answer === 'correct-answer') {
+      const difficulty = this.verifyDifficulty();
+      const timer = ONE;
+      const score = TEN + (difficulty * timer);
+      dispatch(addScoreAction(score));
+    }
+  }
+
   checkAnswer = () => {
     this.setState({ isAnswered: true });
   }
@@ -113,6 +144,7 @@ class ScreenGame extends Component {
                   key={ test }
                   className={ isAnswered && test.split('-')[0] }
                   data-testid={ test }
+                  onClick={ () => this.checkAnswer(test) }
                   disabled={ isAnswered }
                   onClick={ this.checkAnswer }
                 >
