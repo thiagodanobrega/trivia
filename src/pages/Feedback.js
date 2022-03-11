@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 
 export class Feedback extends Component {
-  redirectGame = () => {
+  redirectLogin = () => {
     const { history } = this.props;
     history.push('/');
   };
@@ -31,7 +31,7 @@ export class Feedback extends Component {
         <button
           type="button"
           data-testid="btn-play-again"
-          onClick={ this.redirectGame }
+          onClick={ this.redirectLogin }
         >
           Play again
         </button>
@@ -43,14 +43,14 @@ export class Feedback extends Component {
           Ranking
         </button>
         <h3>
-          Você acertou
+          Um total de
           <p data-testid="feedback-total-score">{player.score}</p>
-          questões!
+          pontos
         </h3>
         <h3>
-          Um total de
+          Você acertou
           <p data-testid="feedback-total-question">{player.assertions}</p>
-          pontos
+          questões!
         </h3>
         <p data-testid="feedback-text">{this.renderFeedback()}</p>
       </div>
