@@ -106,10 +106,6 @@ class ScreenGame extends Component {
     }
   }
 
-  checkAnswer = () => {
-    this.setState({ isAnswered: true });
-  }
-
   handleTimer = () => {
     const oneSecund = 1000;
     const timer = setInterval(() => {
@@ -146,7 +142,6 @@ class ScreenGame extends Component {
                   data-testid={ test }
                   onClick={ () => this.checkAnswer(test) }
                   disabled={ isAnswered }
-                  onClick={ this.checkAnswer }
                 >
                   {res}
                 </button>
