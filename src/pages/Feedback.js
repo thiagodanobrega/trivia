@@ -18,6 +18,11 @@ export class Feedback extends Component {
     return 'Well Done!';
   }
 
+  redirectRanking = () => {
+    const { history } = this.props;
+    history.push('/ranking');
+  };
+
   render() {
     const { player } = this.props;
     return (
@@ -28,7 +33,14 @@ export class Feedback extends Component {
           data-testid="btn-play-again"
           onClick={ this.redirectGame }
         >
-          Play Again
+          Play again
+        </button>
+        <button
+          type="button"
+          data-testid="btn-ranking"
+          onClick={ this.redirectRanking }
+        >
+          Ranking
         </button>
         <h3>
           Você acertou
