@@ -22,7 +22,7 @@ export class Feedback extends Component {
           data-testid="btn-play-again"
           onClick={ this.redirectGame }
         >
-          Play Again
+          Play again
         </button>
         <button
           type="button"
