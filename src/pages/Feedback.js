@@ -4,6 +4,11 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 
 export class Feedback extends Component {
+  redirectGame = () => {
+    const { history } = this.props;
+    history.push('/');
+  };
+  
   renderFeedback = () => {
     const THREE = 3;
     const { player } = this.props;
@@ -18,6 +23,13 @@ export class Feedback extends Component {
     return (
       <div>
         <Header />
+        <button
+          type="button"
+          data-testid="btn-play-again"
+          onClick={ this.redirectGame }
+        >
+          Play Again
+        </button>
         <h3>
           Você acertou
           <p data-testid="feedback-total-score">{player.score}</p>
@@ -29,7 +41,7 @@ export class Feedback extends Component {
           pontos
         </h3>
         <p data-testid="feedback-text">{this.renderFeedback()}</p>
-      </div>
+      <div>
     );
   }
 }
@@ -37,6 +49,7 @@ const { string } = PropTypes;
 
 Feedback.propTypes = {
   player: string.isRequired,
+   history: PropTypes.objectOf.isRequired,
 };
 
 const mapStateToProps = (state) => ({
