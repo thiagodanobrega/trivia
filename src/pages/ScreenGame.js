@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getLocalStorage, saveLocalStorage } from '../services/LocalStorage';
 import { sendActionToken, addScoreAction } from '../redux/actions';
@@ -44,12 +45,21 @@ class ScreenGame extends Component {
     this.organizeAnswers();
   }
 
+  verifyIndex = () => {
+    const { index } = this.state;
+    const MAX_INDEX_QUESTION = 4;
+    if (index <= MAX_INDEX_QUESTION) {
+      this.organizeAnswers();
+      this.handleTimer();
+    }
+  }
+
   increaseIndex = () => {
     this.setState((prev) => ({
       index: prev.index + 1,
       isAnswered: false,
     }), () => {
-      this.organizeAnswers();
+      this.verifyIndex();
     });
   }
 
@@ -93,27 +103,27 @@ class ScreenGame extends Component {
   }
 
   checkAnswer = (answer) => {
-    const ONE = 1;
     const TEN = 10;
 
     this.setState({ isAnswered: true });
+    const { time } = this.state;
     const { dispatch } = this.props;
     if (answer === 'correct-answer') {
       const difficulty = this.verifyDifficulty();
-      const timer = ONE;
-      const score = TEN + (difficulty * timer);
+      const score = TEN + (difficulty * time);
       dispatch(addScoreAction(score));
     }
   }
 
   handleTimer = () => {
     const oneSecund = 1000;
+    this.setState({ time: 30 });
     const timer = setInterval(() => {
       this.setState(({ time }) => ({
         time: time - 1,
       }), () => {
-        const { time } = this.state;
-        if (time === 0) {
+        const { time, isAnswered } = this.state;
+        if (time === 0 || isAnswered) {
           clearInterval(timer);
           this.setState({
             isAnswered: true,
@@ -125,6 +135,11 @@ class ScreenGame extends Component {
 
   render() {
     const { questionsList, index, answerList, isAnswered, time } = this.state;
+    const MAX_INDEX_QUESTION = 4;
+    if (index > MAX_INDEX_QUESTION) {
+      return <Redirect to="/feedback" />;
+    }
+
     return (
       <div>
         <Header />
