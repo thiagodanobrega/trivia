@@ -8,7 +8,7 @@ export class Feedback extends Component {
     const { history } = this.props;
     history.push('/');
   };
-  
+
   renderFeedback = () => {
     const THREE = 3;
     const { player } = this.props;
@@ -53,7 +53,7 @@ export class Feedback extends Component {
           pontos
         </h3>
         <p data-testid="feedback-text">{this.renderFeedback()}</p>
-      <div>
+      </div>
     );
   }
 }
@@ -61,11 +61,11 @@ const { string } = PropTypes;
 
 Feedback.propTypes = {
   player: string.isRequired,
-   history: PropTypes.objectOf.isRequired,
+  history: PropTypes.objectOf.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   player: state.player,
-};
+});
 
 export default connect(mapStateToProps)(Feedback);
