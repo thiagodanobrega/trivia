@@ -2,8 +2,43 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import { requestImage } from '../services/API';
+import { saveLocalStorage, getLocalStorage } from '../services/LocalStorage';
+import { resetScore } from '../redux/actions';
 
 export class Feedback extends Component {
+  state = {
+    ranking: [],
+  }
+
+  componentDidMount = () => {
+    const ranking2 = getLocalStorage('ranking');
+
+    this.setState({
+      ranking: ranking2 || [],
+    }, () => (
+      this.setPlayerLocalStorage()
+    ));
+  }
+
+  setPlayerLocalStorage = () => {
+    const { player } = this.props;
+    const image = requestImage(player);
+    const objPlayer = {
+      name: player.name,
+      score: player.score,
+      picture: image,
+    };
+    this.setState(({ ranking }) => ({
+      ranking: [...ranking, objPlayer],
+    }), () => {
+      const { ranking } = this.state;
+      saveLocalStorage('ranking', ranking);
+      const { dispatch } = this.props;
+      dispatch(resetScore());
+    });
+  }
+
   redirectLogin = () => {
     const { history } = this.props;
     history.push('/');
@@ -57,11 +92,12 @@ export class Feedback extends Component {
     );
   }
 }
-const { string } = PropTypes;
+const { objectOf } = PropTypes;
 
 Feedback.propTypes = {
-  player: string.isRequired,
+  player: objectOf.isRequired,
   history: PropTypes.objectOf.isRequired,
+  dispatch: PropTypes.objectOf.isRequired,
 };
 
 const mapStateToProps = (state) => ({

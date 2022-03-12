@@ -1,4 +1,8 @@
-import { SEND_LOGIN, ADD_SCORE } from '../actions';
+import {
+  SEND_LOGIN,
+  ADD_SCORE,
+  RESET_SCORE,
+} from '../actions';
 
 const INITIAL_STATE = {
   name: '',
@@ -12,6 +16,10 @@ const player = (state = INITIAL_STATE, action) => {
   case SEND_LOGIN:
     return {
       ...state, ...action.payload,
+    };
+  case RESET_SCORE:
+    return {
+      ...state, score: 0,
     };
   case ADD_SCORE:
     return {
