@@ -1,0 +1,52 @@
+.feedback-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 396px 1fr;
+  grid-template-rows: 100px 25px 25px 100px 100px;
+  height: 500px;
+  align-items:  center;
+}
+
+.btn-play-again {
+  grid-column: 2;
+  grid-row: 4;
+  height: 70px;
+  background-color: #86D660;
+  border: none;
+  outline: none;
+  margin-top: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-ranking {
+  grid-column: 2;
+  grid-row: 5;
+  height: 70px;
+  background-color: #F0F0F0;
+  border: none;
+  outline: none;
+  margin-bottom: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.feedback-question {
+  grid-column: 2;
+  grid-row: 2;
+  font-size: 20px;
+  margin: auto;
+}
+
+.feedback-score {
+  grid-column: 2;
+  grid-row: 3;
+  font-size: 20px;
+  margin: auto;
+}
+
+.feedback-text{
+  grid-column: 2;
+  /* grid-row: 1; */
+  font-size: 45px;
+  margin: auto;
+}

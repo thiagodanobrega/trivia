@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { BsFillPlayFill } from 'react-icons/bs';
+import { AiFillSetting } from 'react-icons/ai';
 import PropTypes from 'prop-types';
 import { sendActionToken, sendActionLogin } from '../redux/actions';
 import { fetchToken } from '../services/API';
 import { saveLocalStorage } from '../services/LocalStorage';
+import '../style/login.css';
 
 class Login extends Component {
   state = {
@@ -42,40 +45,50 @@ class Login extends Component {
 
   render() {
     return (
-      <section>
-        <form onChange={ this.handleChange }>
-          <label htmlFor="name">
-            Nome do Jogador:
-            <input
-              id="name"
-              type="text"
-              data-testid="input-player-name"
-            />
-          </label>
-          <label htmlFor="gravatarEmail">
-            Email do Gravatar:
-            <input
-              id="gravatarEmail"
-              type="text"
-              data-testid="input-gravatar-email"
-            />
-          </label>
-          <button
-            type="button"
-            data-testid="btn-play"
-            disabled={ !this.checkLogin() }
-            onClick={ this.handleClick }
-          >
-            Play
-          </button>
-          <button
-            type="button"
-            onClick={ this.onClickSettingsBtn }
-            data-testid="btn-settings"
-          >
-            Configurações
-          </button>
-        </form>
+      <section className="container">
+        <img src="logo-trivia.png" alt="logo" />
+        <div className="form-login">
+          <form onChange={ this.handleChange } className="form">
+            <h1 className="title-login">Play Now!</h1>
+            <label htmlFor="name" className="label">
+              Player:
+              <input
+                id="name"
+                className="input-name"
+                type="text"
+                data-testid="input-player-name"
+              />
+            </label>
+            <label htmlFor="gravatarEmail" className="label">
+              Email:
+              <input
+                id="gravatarEmail"
+                className="input-name"
+                type="text"
+                data-testid="input-gravatar-email"
+              />
+            </label>
+            <button
+              type="button"
+              data-testid="btn-play"
+              className="btn-login"
+              disabled={ !this.checkLogin() }
+              onClick={ this.handleClick }
+            >
+              Play
+              <BsFillPlayFill className="play-icon" />
+            </button>
+            <button
+              type="button"
+              onClick={ this.onClickSettingsBtn }
+              className="btn-settings"
+              data-testid="btn-settings"
+            >
+              Settings
+              <AiFillSetting />
+            </button>
+          </form>
+        </div>
       </section>
     );
   }

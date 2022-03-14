@@ -143,16 +143,28 @@ class ScreenGame extends Component {
     return (
       <div>
         <Header />
-        <p>{ time }</p>
         {questionsList.length > 0 ? (
-          <div>
-            <p data-testid="question-category">{questionsList[index].category}</p>
-            <p data-testid="question-text">{questionsList[index].question}</p>
-            <div data-testid="answer-options">
+          <div className="game-container">
+            <div className="question-wrapper">
+              <p
+                data-testid="question-category"
+                className="category"
+              >
+                {questionsList[index].category}
+              </p>
+              <p data-testid="question-text">{questionsList[index].question}</p>
+              <p className="time">
+                Time:
+                {' '}
+                { time }
+              </p>
+            </div>
+            <div data-testid="answer-options" className="answer-wrapper">
               {answerList.map(({ res, test }) => (
                 <button
                   type="button"
                   key={ test }
+                  id="btn-answer"
                   className={ isAnswered && test.split('-')[0] }
                   data-testid={ test }
                   onClick={ () => this.checkAnswer(test) }
@@ -167,6 +179,7 @@ class ScreenGame extends Component {
                     type="button"
                     data-testid="btn-next"
                     onClick={ this.increaseIndex }
+                    className="btn-next"
                   >
                     Next
                   </button>
