@@ -1,0 +1,19 @@
+.container-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #2fc18c;
+  padding: 20px;
+}
+
+.name-and-image {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.container-header img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50% ;
+}

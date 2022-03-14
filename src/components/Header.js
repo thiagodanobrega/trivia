@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { requestImage } from '../services/API';
 import { saveLocalStorage } from '../services/LocalStorage';
+import '../style/header.css';
 
 class Header extends Component {
   render() {
@@ -11,14 +12,25 @@ class Header extends Component {
     saveLocalStorage('score', playerScore);
 
     return (
-      <section>
-        <h1 data-testid="header-player-name">{player.name}</h1>
-        <img
-          data-testid="header-profile-picture"
-          src={ requestImage(player) }
-          alt="imagem do jogador"
-        />
-        <h3 data-testid="header-score">{playerScore}</h3>
+      <section className="container-header">
+        <div className="name-and-image">
+          <img
+            data-testid="header-profile-picture"
+            src={ requestImage(player) }
+            alt="imagem do jogador"
+          />
+          <h1 data-testid="header-player-name">
+            Player:
+            {' '}
+            {player.name}
+          </h1>
+        </div>
+        <h1>Trivia</h1>
+        <h3 data-testid="header-score">
+          Score:
+          {' '}
+          {playerScore}
+        </h3>
       </section>
     );
   }

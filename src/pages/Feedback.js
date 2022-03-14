@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import { requestImage } from '../services/API';
 import { saveLocalStorage, getLocalStorage } from '../services/LocalStorage';
 import { resetScore } from '../redux/actions';
+import '../style/Feedback.css';
 
 export class Feedback extends Component {
   state = {
@@ -61,33 +62,50 @@ export class Feedback extends Component {
   render() {
     const { player } = this.props;
     return (
-      <div>
+      <div className="feedback-container">
         <Header />
-        <button
-          type="button"
-          data-testid="btn-play-again"
-          onClick={ this.redirectLogin }
-        >
-          Play again
-        </button>
-        <button
-          type="button"
-          data-testid="btn-ranking"
-          onClick={ this.redirectRanking }
-        >
-          Ranking
-        </button>
-        <h3>
-          Um total de
-          <p data-testid="feedback-total-score">{player.score}</p>
-          pontos
-        </h3>
-        <h3>
-          Você acertou
-          <p data-testid="feedback-total-question">{player.assertions}</p>
-          questões!
-        </h3>
-        <p data-testid="feedback-text">{this.renderFeedback()}</p>
+        <div className="feedback-wrapper">
+          <h3 className="feedback-score">
+            Um total de
+            {' '}
+            <span data-testid="feedback-total-score">{player.score}</span>
+            {' '}
+            pontos
+          </h3>
+          <h3 className="feedback-question">
+            Você acertou
+            {' '}
+            <span
+              data-testid="feedback-total-question"
+            >
+              {player.assertions}
+            </span>
+            {' '}
+            questões!
+          </h3>
+          <p
+            data-testid="feedback-text"
+            className="feedback-text"
+          >
+            {this.renderFeedback()}
+          </p>
+          <button
+            type="button"
+            data-testid="btn-play-again"
+            onClick={ this.redirectLogin }
+            className="btn-play-again"
+          >
+            Play again
+          </button>
+          <button
+            type="button"
+            data-testid="btn-ranking"
+            onClick={ this.redirectRanking }
+            className="btn-ranking"
+          >
+            Ranking
+          </button>
+        </div>
       </div>
     );
   }
