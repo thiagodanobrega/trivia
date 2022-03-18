@@ -1,47 +1,43 @@
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Coda' , cursive;
 }
 
 .container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  background-image: linear-gradient(to bottom, #2fc18c 0, #2fc18c 30%, rgb(47, 45, 45) 15%);
+  align-items: center;
+  background-image: url('../background-game.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
   height: 100vh;
+  justify-content: center;
 }
 
-.form-login {
-  display: block;
-  background-color: #fff;
-  grid-column: 2 / 3;
-  grid-row: 2 / 3;
-  border-radius: 20px;
-  /* height: 300px;
-  width: 300px; */
-  margin-top: 100px;
-}
 
 .title-login {
   font-size: 30px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  text-align: center;
   padding-bottom: 35px;
   padding-top: 30px;
+  text-align: center;
 }
 
 .input-name {
   background-color: #fff;
-  width: 100%;
+  border: 1px solid #bdbbbb;
+  border-radius: 6px;
+  font-size: 16px;
   height: 43px;
   margin-bottom: 15px;
   margin-top: 3px;
-  border: 1px solid #bdbbbb;
-  border-radius: 6px;
   outline: #3483fa;
   padding-left: 10px;
-  font-size: 16px;
+  width: 100%;
 }
 
 .input-name:hover {
@@ -53,23 +49,29 @@
 }
 
 .form {
-  width: 90%;
-  height: 90%;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 5px rgb(107, 107, 107);
   margin: auto;
+  padding: 2rem;
+  width: 450px;
 }
 
-.btn-settings{
-  display: flex;
+.btn-settings {
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 40px;
-  border-radius: 6px;
+  background: #e463c3;
   border: none;
-  margin-bottom: 45px;
-  background: #929292;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-family: 'Coda' , cursive;
   font-size: 16px;
+  height: 40px;
+  justify-content: center;
+  margin-bottom: 45px;
   transition: transform 0.3s;
+  width: 100%;
 }
 
 .btn-settings:hover {
@@ -77,18 +79,20 @@
 }
 
 .btn-login {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin-bottom: 15px;
-  height: 40px;
-  border-radius: 6px;
+  background-color: #3f88ee;
   border: none;
-  background: #2fc18c;
-  color: black;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-family: 'Coda' , cursive;
   font-size: 16px;
+  height: 40px;
+  justify-content: center;
+  margin-bottom: 15px;
   transition: transform 0.3s;
+  width: 100%;
 }
 
 .btn-login:hover {
@@ -96,7 +100,6 @@
 }
 
 img {
-  height: 260px;
-  grid-column: 2/3;
+  height: 300px;
   margin: auto;
 }
