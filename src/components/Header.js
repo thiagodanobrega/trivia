@@ -13,24 +13,33 @@ class Header extends Component {
 
     return (
       <section className="container-header">
+        <div className="logo-game">
+          <img src="logo-game.png" alt="logo do game" />
+        </div>
         <div className="name-and-image">
           <img
             data-testid="header-profile-picture"
             src={ requestImage(player) }
             alt="imagem do jogador"
+            className="img-user"
           />
-          <h1 data-testid="header-player-name">
-            Player:
-            {' '}
-            {player.name}
-          </h1>
+          <div className="user-wrapper">
+            <p
+              data-testid="header-player-name"
+              className="player-name"
+            >
+              {player.name}
+            </p>
+            <p
+              data-testid="header-score"
+              className="player-score"
+            >
+              Points:
+              {' '}
+              {playerScore}
+            </p>
+          </div>
         </div>
-        <h1>Trivia</h1>
-        <h3 data-testid="header-score">
-          Score:
-          {' '}
-          {playerScore}
-        </h3>
       </section>
     );
   }

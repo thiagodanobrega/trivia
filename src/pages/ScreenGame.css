@@ -1,3 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Coda&family=Dela+Gothic+One&display=swap');
+
+.body {
+  background-image: linear-gradient(to right top, #d16ba5, #ca7ebe, #c090d1, #b7a2e0, #b0b2ea, #a6bef4, #9ec9fb, #97d4ff, #81dfff, #6ce9ff, #5ef3fe, #5ffbf1);
+  height: 100vh;
+}
+
+.game-container {
+  align-items: center;
+  display: flex;
+  gap: 2.5rem;
+  height: 500px;
+  justify-content: center;
+}
+
+.question-wrapper {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 0 5px rgb(107, 107, 107);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 1rem;
+  height: 430px;
+  margin-top: 10%;
+  position: relative;
+  width: 600px;
+}
+
+.question-header {
+  display: flex;
+  position: relative;
+}
+
+.category {
+  align-items: center;
+  background-color: #3f88ee;
+  border-radius: 15px 0 35px;
+  color: white;
+  display: flex;
+  font-family: 'Dela Gothic One' , cursive;
+  font-size: 1.4rem;
+  height: 70px;
+  justify-content: center;
+  text-align: center;
+  width: 70%;
+  z-index: 1;
+}
+
+.time {
+  align-items: center;
+  background-color: #38b6ff;
+  border-radius: 0 15px 0 0;
+  color: white;
+  display: flex;
+  font-size: 1.2rem;
+  font-weight: bold;
+  height: 70px;
+  justify-content: center;
+  padding-left: 1rem;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  width: 36%;
+}
+
+.question-text {
+  font-family: 'Coda' , cursive;
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
+  text-align: center;
+}
+
+.question-wrapper img {
+  bottom: 10px;
+  height: 100px;
+  position: absolute;
+  right: 0;
+  width: 100px;
+}
+
+.answer-wrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 10%;
+}
+
+.btn-answer {
+  background-color: rgb(240, 240, 240);
+  border: none;
+  border-radius: 15px;
+  box-shadow: 1px 1px 5px rgb(47, 47, 47);
+  color: black;
+  cursor: pointer;
+  font-family: 'Coda' , cursive;
+  font-size: 1.1rem;
+  height: 50px;
+  outline: none;
+  width: 385px;
+}
+
 .correct {
   border: 3px solid rgb(6, 240, 15);
 }
@@ -6,60 +109,15 @@
   border: 3px solid red;
 }
 
-.game-container {
-  height: 500px;
-  display: flex;
-  align-items:  center;
-  justify-content: center;
-  gap: 2.5rem;
-}
-
-.question-wrapper {
-  position: relative;
-  display: flex;
-  flex-direction:  column;
-  background-color: gray;
-  max-width: 300px;
-  min-height: 290px;
-  flex-wrap: wrap;
-  padding: 1rem;
-  gap: 1rem;
-}
-
-.category {
-  padding-top: 1rem;
-  text-align: center;
-  background-color: #DDDDDD;
-  width: 270px;
-  height: 50px;
-}
-
-.answer-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: center;
-}
-
-#btn-answer {
-  cursor: pointer;
-  width: 385px;
-  height: 35px;
-  outline: none;
-}
-
 .btn-next {
-  cursor: pointer;
-  width: 200px;
-  height: 40px;
-  background-color: #2fc18c;
-  outline: none;
+  background-color: #3f88ee;
   border: none;
+  border-radius: 15px;
+  box-shadow: 1px 1px 5px rgb(47, 47, 47);
+  color: white;
+  cursor: pointer;
+  height: 50px;
+  outline: none;
+  width: 150px;
 }
 
-.time {
-  position: absolute;
-  bottom: -30px;
-  color: red;
-  font-weight: bold;
-}

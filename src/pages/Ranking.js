@@ -66,15 +66,15 @@ class Ranking extends Component {
               </div>
             ))
           }
-          <button
-            type="button"
-            className="btn-ranking"
-            data-testid="btn-go-home"
-            onClick={ this.redirectLogin }
-          >
-            Login
-          </button>
         </div>
+        <button
+          type="button"
+          className="btn-play-login"
+          data-testid="btn-go-home"
+          onClick={ this.redirectLogin }
+        >
+          Login
+        </button>
       </div>
     );
   }

@@ -1,19 +1,56 @@
 .container-header {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  background-color: #2fc18c;
+  background-color: #33327e;
+  display: flex;
+  height: 120px;
+  justify-content: space-around;
   padding: 20px;
 }
 
 .name-and-image {
-  display: flex;
   align-items: center;
-  gap: 15px;
+  display: flex;
 }
 
-.container-header img {
-  height: 50px;
-  width: 50px;
-  border-radius: 50% ;
+.img-user {
+  border: 3px solid #33327e;
+  border-radius: 50%;
+  height: 55px;
+  margin-right: -14px;
+  width: 55px;
+  z-index: 1;
+}
+
+.player-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.player-score {
+  color: #33327e;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.user-wrapper {
+  background-color: white;
+  border-radius: 0 30px 30px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  height: 48px;
+  justify-content: center;
+  min-width: 150px;
+  padding: 1rem;
+}
+
+.logo-game {
+  height: 150px;
+  width: 150px;
+}
+
+.logo-game img {
+  height: 100%;
+  object-fit: contain;
+  width: 100%;
 }

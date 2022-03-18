@@ -46,49 +46,47 @@ class Login extends Component {
   render() {
     return (
       <section className="container">
-        <img src="logo-trivia.png" alt="logo" />
-        <div className="form-login">
-          <form onChange={ this.handleChange } className="form">
-            <h1 className="title-login">Play Now!</h1>
-            <label htmlFor="name" className="label">
-              Player:
-              <input
-                id="name"
-                className="input-name"
-                type="text"
-                data-testid="input-player-name"
-              />
-            </label>
-            <label htmlFor="gravatarEmail" className="label">
-              Email:
-              <input
-                id="gravatarEmail"
-                className="input-name"
-                type="text"
-                data-testid="input-gravatar-email"
-              />
-            </label>
-            <button
-              type="button"
-              data-testid="btn-play"
-              className="btn-login"
-              disabled={ !this.checkLogin() }
-              onClick={ this.handleClick }
-            >
-              Play
-              <BsFillPlayFill className="play-icon" />
-            </button>
-            <button
-              type="button"
-              onClick={ this.onClickSettingsBtn }
-              className="btn-settings"
-              data-testid="btn-settings"
-            >
-              Settings
-              <AiFillSetting />
-            </button>
-          </form>
-        </div>
+        <img src="logo-game.png" alt="logo" />
+        <form onChange={ this.handleChange } className="form">
+          <h1 className="title-login">Play Now!</h1>
+          <label htmlFor="name" className="label">
+            Player:
+            <input
+              id="name"
+              className="input-name"
+              type="text"
+              data-testid="input-player-name"
+            />
+          </label>
+          <label htmlFor="gravatarEmail" className="label">
+            Email:
+            <input
+              id="gravatarEmail"
+              className="input-name"
+              type="text"
+              data-testid="input-gravatar-email"
+            />
+          </label>
+          <button
+            type="button"
+            data-testid="btn-play"
+            className="btn-login"
+            disabled={ !this.checkLogin() }
+            onClick={ this.handleClick }
+          >
+            Play
+            <BsFillPlayFill className="play-icon" />
+          </button>
+          <button
+            type="button"
+            onClick={ this.onClickSettingsBtn }
+            className="btn-settings"
+            data-testid="btn-settings"
+          >
+            Settings
+            <AiFillSetting />
+          </button>
+        </form>
       </section>
     );
   }

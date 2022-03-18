@@ -141,31 +141,40 @@ class ScreenGame extends Component {
     }
 
     return (
-      <div>
+      <div className="body">
         <Header />
         {questionsList.length > 0 ? (
           <div className="game-container">
             <div className="question-wrapper">
+              <div className="question-header">
+                <p
+                  data-testid="question-category"
+                  className="category"
+                >
+                  {questionsList[index].category}
+                </p>
+                <p className="time">
+                  Time:
+                  {' '}
+                  { time }
+                </p>
+              </div>
               <p
-                data-testid="question-category"
-                className="category"
-              >
-                {questionsList[index].category}
-              </p>
-              <p data-testid="question-text">{questionsList[index].question}</p>
-              <p className="time">
-                Time:
-                {' '}
-                { time }
-              </p>
+                data-testid="question-text"
+                className="question-text"
+                dangerouslySetInnerHTML={ { __html: questionsList[index].question } }
+              />
+              <img
+                src="ponto-de-interrogacao.png"
+                alt="ícone de interrogação"
+              />
             </div>
             <div data-testid="answer-options" className="answer-wrapper">
               {answerList.map(({ res, test }) => (
                 <button
                   type="button"
                   key={ test }
-                  id="btn-answer"
-                  className={ isAnswered && test.split('-')[0] }
+                  className={ `btn-answer ${isAnswered && test.split('-')[0]}` }
                   data-testid={ test }
                   onClick={ () => this.checkAnswer(test) }
                   disabled={ isAnswered }

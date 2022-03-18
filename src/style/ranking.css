@@ -1,47 +1,60 @@
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 .main-ranking {
-  background-color:rgb(87, 8, 190) ;
+  align-items: center;
+  background-image: linear-gradient(to right top, #d16ba5, #ca7ebe, #c090d1, #b7a2e0, #b0b2ea, #a6bef4, #9ec9fb, #97d4ff, #81dfff, #6ce9ff, #5ef3fe, #5ffbf1);
+  display: flex;
+  flex-direction: column;
   height: 100vh;
+  padding: 2rem;
 }
 
 .raking-container {
+  align-items: center;
   display: flex;
-  align-items: center
 }
 
 .score {
-  padding: 20px;
+  align-items: center;
+  background-color: #3f88ee;
+  border-radius: 3px;
+  display: flex;
+  font-size: 1.2rem;
+  font-weight: bold;
+  height: 60px;
+  justify-content: center;
   margin-bottom: 15px;
   margin-right: 10px;
-  border-radius: 3px;
-  background-color: rgb(151, 87, 223);
+  width: 60px;
 }
 
-.style1{
-  background-color: yellow;
+.style1 {
+  background-color: rgb(236, 194, 55);
 }
 
 .style2 {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(200, 199, 199);
 }
 
 .style3 {
-  background-color: rgb(146, 113, 3);
+  background-color: rgb(170, 104, 28);
 }
 
 .container-ranking {
+  align-items: center;
+  background-color: rgb(87, 8, 190);
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
-  background-color: gb(87, 8, 190) ;
-  max-width: 700px;
+  height: 700px;
   margin: auto;
-  min-height: 300px;
-  align-items: center;
+  margin-bottom: 2rem;
+  overflow-y: scroll;
+  width: 600px;
 }
 
 .trophy {
@@ -50,59 +63,76 @@
 }
 
 .title-ranking {
+  align-items: center;
+  background-color: rgb(59, 7, 128);
+  border-radius: 15px 15px 0 0;
   color: #fff;
-
+  display: flex;
+  font-family: 'Dela Gothic One' , cursive;
   font-size: 40px;
-  text-align: center;
-  padding-top: 18px;
-  background-color: rgb(87, 8, 190);
-  border-radius: 10px;
   margin-bottom: 30px;
+  padding-bottom: 10px;
+  padding-left: 15%;
+  padding-top: 18px;
+  text-align: center;
+  width: 100%;
 }
 
-.btn-ranking {
-  width: 300px;
-  margin: auto;
-  margin-top: 20px;
-  border-radius: 5px;
+.btn-play-login {
+  background-color: white;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 1px 1px 5px rgba(47, 47, 47, 0.719);
+  cursor: pointer;
   font-size: 25px;
+  height: 50px;
+  margin-bottom: 1rem;
+  margin-top: 20px;
+  width: 300px;
 }
 
 .player-ranking {
+  align-items: center;
+  background-color: #38b6ff;
+  border-radius: 15px;
   display: flex;
   justify-content: flex-start;
-  background-color: aqua;
-  border-radius: 6px;
   margin-bottom: 15px;
   min-height: 60px;
-  align-items: center;
   width: 400px;
 }
 
 .picture-ranking {
-  width: 50px;
-  height: 50px;
+  border: 5px solid #38b6ff;
   border-radius: 50%;
-  padding: 0;
+  height: 55px;
   margin: 0;
   margin-left: 10px;
+  margin-right: -22px;
+  padding: 0;
+  width: 55px;
+  z-index: 1;
 }
 
 .name-ranking {
-  margin-bottom: 5px;
   font-size: 17px;
-  margin-left: 10px ;
+  font-weight: bold;
+  margin-bottom: 1px;
+  margin-left: 17px;
 }
 
 .name-score-container {
-  margin-left: 10px;
   background-color: white;
-  width: 325px;
-  border-radius: 0 7px 7px 0;
-  height: 47px;
+  border-radius: 0 30px 30px 0;
+  height: 45px;
+  margin-left: 10px;
+  padding-left: 0.3rem;
+  width: 300px;
 }
 
 .score-ranking {
-  font-size: 17px;
-  margin-left: 10px;
+  color: #33327e;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-left: 17px;
 }
