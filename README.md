@@ -74,7 +74,7 @@ Agradeço às seguintes pessoas que contribuíram para este projeto:
     </td>
     <td align="center">
       <a href="#">
-        <img src="https://media-exp1.licdn.com/dms/image/C4D03AQGvitnFIEEWCA/profile-displayphoto-shrink_400_400/0/1638981436722?e=1657756800&v=beta&t=KBE240tpZ_iRexWmOUPoa9hT5qS2dy-Qwmlw5V0JLzw"  width="100px;" alt="Foto do Steve Jobs"/><br>
+        <img src="https://media-exp1.licdn.com/dms/image/C4D03AQGvitnFIEEWCA/profile-displayphoto-shrink_400_400/0/1638981436722?e=1657756800&v=beta&t=KBE240tpZ_iRexWmOUPoa9hT5qS2dy-Qwmlw5V0JLzw"  width="100px;" alt="Foto"/><br>
          <sub>
            <a href="https://www.linkedin.com/in/joaogrs159/">João Gabriel</a>
         </sub>
